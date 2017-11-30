@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.times.dao.TimeUserMapper">
+  <resultMap id="BaseResultMap" type="com.example.times.model.TimeUser">
+    <id column="id" jdbcType="REAL" property="id" />
+    <result column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="userps" jdbcType="VARCHAR" property="userps" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userid, username, password, userps
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    *
+    from times_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="findByUserName" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    *
+    from times_user
+    where username = #{username,jdbcType=INTEGER} and  password =  #{password,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from times_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.times.model.TimeUser">
+    insert into times_user (id, userid, username, 
+      password, userps)
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{userps,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.times.model.TimeUser">
+    update times_user
+    set userid = #{userid,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      userps = #{userps,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
